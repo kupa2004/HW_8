@@ -80,10 +80,9 @@
         state: directory
 
     - name: Copy boxfuse
-      synchronize:
+      ansible.posix.synchronize:
         src: /home/boxfuse-sample-java-war-hello/target/
-        dest: /opt/tomcat/webapps/
-        delegate_to: localhost
+        dest: web:/opt/tomcat/webapps/
 
     - name: Start and enable Tomcat service
       systemd:

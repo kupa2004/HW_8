@@ -37,6 +37,21 @@
       args:
         chdir: /home/boxfuse-sample-java-war-hello/
 
+    - name: Create directory
+        file:
+          path: /home/HW_8/
+          state: directory
+
+    - name: Clone tomcat.service
+        git:
+          repo: 'https://github.com/kupa2004/HW_8.git'
+          dest: /home/HW_8/
+
+    - name: Remove tomcat.service
+      copy:
+        src: tomcat.service
+        dest: /
+
 - name: run boxfuse
   hosts: web
   remote_user: root
@@ -79,6 +94,12 @@
         recurse: yes
         state: directory
 
+    - name: Copy Tomcat service from local to remote
+      copy:
+        src: tomcat.service
+        dest: /etc/systemd/system/
+        mode: 0755
+
     - name: Start and enable Tomcat service
       systemd:
         name: tomcat
@@ -90,9 +111,4 @@
       copy:
         src: /home/boxfuse-sample-java-war-hello/target/
         dest: /opt/tomcat/webapps/
-
-
-
-
-
 

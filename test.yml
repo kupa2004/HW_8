@@ -11,11 +11,11 @@
         name: default-jdk, git, maven
         state: present
     - name: Clone boxfuse
-        git:
-          repo: "https://github.com/boxfuse/boxfuse-sample-java-war-hello.git"
-          dest: /home/
+      git:
+        repo: "https://github.com/boxfuse/boxfuse-sample-java-war-hello.git"
+        dest: /home/
     - name: Build boxfuse
-        command: mvn package
+      command: mvn package
 
 - name: run boxfuse
   hosts: 84.201.178.88
@@ -23,7 +23,7 @@
   become: true
   tasks:
     - name: Update system
-        apt: update_cache=yes
+      apt: update_cache=yes
 
     - name: add tomcat group
       group:

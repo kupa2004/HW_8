@@ -83,15 +83,17 @@
       apt:
         name: synchronize
         state: present
-
-    - name: Copy boxfuse
-      ansible.posix.synchronize:
-        src: /home/boxfuse-sample-java-war-hello/target/
-        dest: web:/opt/tomcat/webapps/
-
     - name: Start and enable Tomcat service
       systemd:
         name: tomcat
         state: started
         enabled: true
         daemon_reload: true
+
+    - name: Copy boxfuse
+      synchronize:
+        mode: pull
+        src: /home/boxfuse-sample-java-war-hello/target/
+        dest: /opt/tomcat/webapps/
+
+

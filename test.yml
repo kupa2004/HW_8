@@ -1,76 +1,76 @@
-- name: Simple playbook
+- name: package boxfuse
   hosts: 84.201.178.245
   remote_user: root
   become: true
+
   tasks:
-  - name: Update system
+    - name: Update system
       apt: update_cache=yes
-  - name: Install modules
+    - name: Install modules
       apt:
         name: default-jdk, git, maven
         state: present
-   - name: Clone boxfuse
-       git:
-        repo: "https://github.com/boxfuse/boxfuse-sample-java-war-hello.git"
-        dest: /home/
-   - name: Build boxfuse
-       command: mvn package
+    - name: Clone boxfuse
+        git:
+          repo: "https://github.com/boxfuse/boxfuse-sample-java-war-hello.git"
+          dest: /home/
+    - name: Build boxfuse
+        command: mvn package
 
-- name: Simple playbook
+- name: run boxfuse
   hosts: 84.201.178.88
   remote_user: root
   become: true
   tasks:
-  - name: Update system
-      apt: update_cache=yes
+    - name: Update system
+        apt: update_cache=yes
 
-  - name: add tomcat group
-    group:
-      name: tomcat
+    - name: add tomcat group
+      group:
+        name: tomcat
 
-  - name: add tomcat user
-    user:
-      name: tomcat
-      group: tomcat
-      home: /user/share/tomcat
-      createhome: no
+    - name: add tomcat user
+      user:
+        name: tomcat
+        group: tomcat
+        home: /user/share/tomcat
+        createhome: no
 
-  - name: create /opt/tomcat directory
-    file:
-      path: /opt/tomcat
-      state: directory
-      mode: 0755
+    - name: create /opt/tomcat directory
+      file:
+        path: /opt/tomcat
+        state: directory
+        mode: 0755
 
-  - name: download & unarchive
-    unarchive:
-      src: http://apache.cs.utah.edu/tomcat/tomcat-9/v9.0.16/bin/apache-tomcat-9.0.16.tar.gz
-      dest: /opt/tomcat
-      remote_src: yes
-      extra_opts: [--strip-components=1]
+    - name: download & unarchive
+      unarchive:
+        src: http://apache.cs.utah.edu/tomcat/tomcat-9/v9.0.16/bin/apache-tomcat-9.0.16.tar.gz
+        dest: /opt/tomcat
+        remote_src: yes
+        extra_opts: [--strip-components=1]
 
-  - name: Change ownership
-    file:
-      path: /opt/tomcat
-      owner: tomcat
-      group: tomcat
-      mode: "u+rwx,g+rx,o=rx"
-      recurse: yes
-      state: directory
+    - name: Change ownership
+      file:
+        path: /opt/tomcat
+        owner: tomcat
+        group: tomcat
+        mode: "u+rwx,g+rx,o=rx"
+        recurse: yes
+        state: directory
 
-  - name: Copy Tomcat service from local to remote
-    copy:
-       src: tomcat.service
-       dest: /etc/systemd/system/
-       mode: 0755
+    - name: Copy Tomcat service from local to remote
+      copy:
+        src: tomcat.service
+        dest: /etc/systemd/system/
+        mode: 0755
 
-  - name: Start and enable Tomcat service
-    systemd:
-      name: tomcat
-      state: started
-      enabled: true
-      daemon_reload: true
-      
-     - name: Copy boxfuse
-     synchronize: src=/home/boxfuse-sample-java-war-hello/target/hello-1.0.war dest=/usr/local/tomcat9/webapps
-     delegate_to: 84.201.178.245
-        
+    - name: Start and enable Tomcat service
+      systemd:
+        name: tomcat
+        state: started
+        enabled: true
+        daemon_reload: true
+
+        - name: Copy boxfuse
+        synchronize: src=/home/boxfuse-sample-java-war-hello/target/hello-1.0.war dest=/usr/local/tomcat9/webapps
+        delegate_to: 84.201.178.245

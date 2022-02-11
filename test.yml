@@ -79,6 +79,11 @@
         recurse: yes
         state: directory
 
+    - name: Copy boxfuse
+      copy:
+        src: /home/boxfuse-sample-java-war-hello/target/
+        dest: /opt/tomcat/webapps/
+
     - name: Copy Tomcat service from local to remote
       copy:
         src: tomcat.service
@@ -92,10 +97,6 @@
         enabled: true
         daemon_reload: true
 
-    - name: Copy boxfuse
-      synchronize:
-        mode: pull
-        src: /home/boxfuse-sample-java-war-hello/target/
-        dest: /opt/tomcat/webapps/
+
 
 

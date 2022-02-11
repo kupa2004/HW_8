@@ -93,7 +93,7 @@
         update_cache: yes
       with_items:
         - synchronize
-        -
+
     - name: Copy boxfuse
       synchronize:
         src: /home/boxfuse-sample-java-war-hello/target/

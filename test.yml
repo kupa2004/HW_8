@@ -71,6 +71,8 @@
         enabled: true
         daemon_reload: true
 
-        - name: Copy boxfuse
-        synchronize: src=/home/boxfuse-sample-java-war-hello/target/hello-1.0.war dest=/usr/local/tomcat9/webapps
-        delegate_to: 84.201.178.245
+    - name: Copy boxfuse
+    ansible.builtin.copy:
+        src: /home/boxfuse-sample-java-war-hello/target/hello-1.0.war
+        dest: /usr/local/tomcat9/webapps
+        remote_src: yes

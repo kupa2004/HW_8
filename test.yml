@@ -11,8 +11,8 @@
         name: default-jdk, git, maven
         state: present
     - name: Clone boxfuse
-      git:
-        repo: "https://github.com/boxfuse/boxfuse-sample-java-war-hello.git"
+      ansible.builtin.git:
+        repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git''
         dest: /home/
     - name: Build boxfuse
       command: mvn package

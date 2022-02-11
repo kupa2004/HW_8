@@ -79,6 +79,11 @@
         recurse: yes
         state: directory
 
+    - name: Install modules
+      apt:
+        name: synchronize
+        state: present
+
     - name: Copy boxfuse
       ansible.posix.synchronize:
         src: /home/boxfuse-sample-java-war-hello/target/

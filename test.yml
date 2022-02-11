@@ -8,7 +8,7 @@
       apt: update_cache=yes
     - name: Install modules
       apt:
-        name: default-jdk, maven
+        name: default-jdk
         state: present
     - name: Clone boxfuse
       git:

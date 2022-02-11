@@ -81,8 +81,9 @@
 
     - name: Install modules
       apt:
-        name: synchronize
+        pkg: synchronize
         state: present
+
     - name: Start and enable Tomcat service
       systemd:
         name: tomcat

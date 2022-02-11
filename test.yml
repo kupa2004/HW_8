@@ -38,14 +38,14 @@
         chdir: /home/boxfuse-sample-java-war-hello/
 
     - name: Create directory
-        file:
-          path: /home/HW_8/
-          state: directory
+      file:
+        path: /home/HW_8/
+        state: directory
 
     - name: Clone tomcat.service
-        git:
-          repo: 'https://github.com/kupa2004/HW_8.git'
-          dest: /home/HW_8/
+      git:
+        repo: 'https://github.com/kupa2004/HW_8.git'
+        dest: /home/HW_8/
 
     - name: Remove tomcat.service
       copy:

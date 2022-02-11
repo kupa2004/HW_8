@@ -33,7 +33,7 @@
         - maven
 
     - name: Build boxfuse
-      command: './mvnw clean package'
+      command: 'mvn package'
       args:
         chdir: /home/boxfuse-sample-java-war-hello/
 

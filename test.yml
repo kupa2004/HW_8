@@ -85,15 +85,6 @@
         dest: /etc/systemd/system/
         mode: 0755
 
-    - name: install synchronize
-      become: yes
-      apt:
-        pkg: synchronize
-        state: latest
-        update_cache: yes
-      with_items:
-        - synchronize
-
     - name: Copy boxfuse
       synchronize:
         src: /home/boxfuse-sample-java-war-hello/target/

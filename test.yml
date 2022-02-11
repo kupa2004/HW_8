@@ -79,11 +79,6 @@
         recurse: yes
         state: directory
 
-    - name: Install modules
-      apt:
-        pkg: synchronize
-        state: present
-
     - name: Start and enable Tomcat service
       systemd:
         name: tomcat

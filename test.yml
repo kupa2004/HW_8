@@ -64,16 +64,16 @@
         dest: /etc/systemd/system/
         mode: 0755
 
-    - name: Start and enable Tomcat service
-      systemd:
-        name: tomcat
-        state: started
-        enabled: true
-        daemon_reload: true
-
     - name: Copy boxfuse
       copy:
         src: /home/boxfuse-sample-java-war-hello/target/hello-1.0.war
         dest: /usr/local/tomcat9/webapps/hello-1.0.war
         remote_src: yes
         validate: /usr/sbin/visudo -csf %s
+
+    - name: Start and enable Tomcat service
+      systemd:
+        name: tomcat
+        state: started
+        enabled: true
+        daemon_reload: true

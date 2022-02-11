@@ -21,6 +21,17 @@
       git:
         repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
         dest: /home/boxfuse-sample-java-war-hello/
+
+    - name: install maven
+      become: yes
+      apt:
+        pkg: {{ item }}
+        state: latest
+        update_cache: yes
+        cache_valid_time: 3600
+      with_items:
+        - maven
+
     - name: Build boxfuse
       command: mvn package
 

@@ -13,7 +13,8 @@
     - name: Clone boxfuse
       git:
         repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
-        dest: /home/boxfuse-sample-java-war-hello/
+        dest: /home/
+        clone: no
     - name: Build boxfuse
       command: mvn package
 

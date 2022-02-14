@@ -1,5 +1,5 @@
 - name: package boxfuse
-  hosts: localhost
+  hosts: db
   remote_user: root
   become: true
 
@@ -119,4 +119,4 @@
 
     - name: Copy boxfuse
       synchronize: src=/home/boxfuse-sample-java-war-hello/target/ dest=/opt/tomcat/webapps/
-      delegate_to: 51.250.16.127
+      delegate_to: 84.201.167.12

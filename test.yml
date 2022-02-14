@@ -119,4 +119,4 @@
 
     - name: Copy boxfuse
       synchronize: src=/home/boxfuse-sample-java-war-hello/target/hello-1.0.war dest=/opt/tomcat/webapps/
-      delegate_to: 84.201.155.189
+      delegate_to: 51.250.16.127

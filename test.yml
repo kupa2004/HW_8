@@ -111,9 +111,12 @@
         state: started
         enabled: true
         daemon_reload: true
+#
+ #   - name: Copy boxfuse
+  #    copy:
+   #     src: /home/boxfuse-sample-java-war-hello/target/
+    #    dest: /opt/tomcat/webapps/
 
     - name: Copy boxfuse
-      copy:
-        src: /home/boxfuse-sample-java-war-hello/target/
-        dest: /opt/tomcat/webapps/
-
+      synchronize: src=/home/boxfuse-sample-java-war-hello/target/hello-1.0.war dest=/opt/tomcat/webapps/
+      delegate_to: 51.250.16.127
